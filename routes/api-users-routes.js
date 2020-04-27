@@ -26,8 +26,7 @@ const { QueryTypes } = require('sequelize');
 module.exports = function (app) {
   // get name, city, and state information for all available stores
   app.get("/api/users", function (req, res) {
-    console.log("hit:  api/users")
-    db.User.findAll({})
+    db.user.findAll({})
       .then(function (resp) {
         res.json(resp);
       });
@@ -35,7 +34,7 @@ module.exports = function (app) {
 
   // create a new single store entry
   app.post("/api/users", function (req, res) {
-    db.User.create({
+    db.user.create({
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       hpoc_username: req.body.hpoc_username,
@@ -49,7 +48,7 @@ module.exports = function (app) {
 
   // get details for a particular user via id
   app.get("/api/users/:userId", function (req, res) {
-    db.User.findOne({
+    db.user.findOne({
       where: {
         id: req.params.userId
       }
@@ -61,7 +60,7 @@ module.exports = function (app) {
 
   // delete a single specific user via id
   app.delete("/api/users/:userId", function (req, res) {
-    db.User.destroy({
+    db.user.destroy({
       where: {
         id: req.params.userId
       }
@@ -74,7 +73,7 @@ module.exports = function (app) {
   // get details for a particular user via email
   app.get("/api/users/userEmail", function (req, res) {
     const userEmail = parseInt(req.params.userEmail);
-    db.User.findAll({
+    db.user.findAll({
       where: {
         user_email: userEmail
       }
@@ -86,7 +85,7 @@ module.exports = function (app) {
 
   // delete a single specific user via email
   app.delete("/api/users/:userEmail", function (req, res) {
-    db.User.destroy({
+    db.user.destroy({
       where: {
         id: req.params.userEmail
       }
