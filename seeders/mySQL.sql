@@ -9,17 +9,20 @@ CREATE DATABASE accounts;
 USE accounts;
 
 
-/*Table structure for table Products*/
+/*Table structure for table users*/
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   id int NOT NULL AUTO_INCREMENT,
-  first_name varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  last_name varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   email varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   hpoc_username varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   hpoc_password varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE NOW(),
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   PRIMARY KEY (id)
 );
-/*Dumping data into table Products*/
-INSERT INTO users (first_name,last_name,email,hpoc_username,hpoc_password) VALUES ('sharon','santana','sharon@nutanix.com','test@ntnx.local','nutanix/4u');
+
+/*Dumping data into table users*/
+INSERT INTO users (email,hpoc_username,hpoc_password) VALUES ('unassigned','test1@ntnx.local','nutanix/4u');
+INSERT INTO users (email,hpoc_username,hpoc_password) VALUES ('unassigned','test2@ntnx.local','nutanix/4u');
+INSERT INTO users (email,hpoc_username,hpoc_password) VALUES ('unassigned','test3@ntnx.local','nutanix/4u');
+INSERT INTO users (email,hpoc_username,hpoc_password) VALUES ('unassigned','test4@ntnx.local','nutanix/4u');

@@ -1,27 +1,22 @@
-// *****************************************************************************
-// Server.js - This file is the initial starting point for the Node/Express server.
-//
-// ******************************************************************************
-
-// Dependencies
-// =============================================================
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
+
+const PORT = process.env.PORT|| 3001;
+
+const  cors = require("cors");
 const app = express();
 
-
+// if(process.env.NODE_ENV === 'production') {
+//     app.use(express.static('client/build'));
+// }
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Declare routes right here
-// const routes = require('./routes/api-users-routes.js');
-// app.use(routes);
-require("./routes/api-users-routes.js")(app);
+// Declare routes right here.
+const routes = require('./routes');
 
-const PORT = process.env.PORT || 3001;
+// Prepend / to any route declared inside of routes
+app.use(routes);
+
 app.listen(PORT, () => console.log('Port started on port: ' + PORT));
-
-
-
