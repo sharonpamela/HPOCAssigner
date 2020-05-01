@@ -18,7 +18,7 @@ const axios = require('axios');
 //         console.log(e);
 //     });
 
-axios.post('http://10.42.247.61/api/users/sharon@nutanix.com')
+axios.get('http://10.42.247.61/api/users/sharon@nutanix.com')
     .then(response => {
         console.log(response.data)
     })
