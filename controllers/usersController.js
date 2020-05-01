@@ -13,7 +13,6 @@ module.exports = {
     },
     createUser: async(req, res) => {
         const { email } = req.body;
-
         // if the email already exists in db, don't assign a new hpoc account
         const find_email_query = `SELECT * FROM users WHERE email= ?;`;
         await connection.query(find_email_query, email, (err, response) => {
@@ -33,7 +32,7 @@ module.exports = {
                     if (err) {
                         return res.status(404).send(err);
                     }
-                    if (response.length < 0) {
+                    if (response.length === 0) {
                         res.json({
                             "message": "There are no unassigned hpoc accounts left"
                         })
@@ -54,5 +53,26 @@ module.exports = {
                 });
             }
         });
+    },
+    getUserByEmail: (req, res) => {
+        const email = req.params.email
+        const find_user_query = `SELECT * FROM users WHERE email= ? LIMIT 1;`;
+        connection.query(find_user_query, email, (err, response) => {
+            if (err) {
+                return res.status(404).send(err);
+            }
+
+            if (response.length === 0) {
+                res.json({
+                    "message": "This user doesn't exist"
+                })
+            } else {
+                // res.json({ "response": response[0] })
+                res.json({
+                    "username": `${response[0].hpoc_username}`,
+                    "userpass": `${response[0].hpoc_password}`
+                })
+            }
+        })
     }
-};
+}
