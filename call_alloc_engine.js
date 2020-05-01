@@ -1,6 +1,5 @@
 const axios = require('axios');
 var regedit = require('regedit')
-import axios from 'axios';
 
 regedit.list('HKCU\\Environment', function(err, result) {
     const email = result['HKCU\\Environment'].values.FRAME_USER_EMAIL.value
